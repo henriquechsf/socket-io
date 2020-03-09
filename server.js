@@ -14,6 +14,7 @@ io.on('connection', (socket) => {
     // evento emitido quando receber msg do cliente
     socket.on('msg', (msg) => {
         console.log(msg)
+        socket.broadcast.emit('msg', msg);
     })
 })
 

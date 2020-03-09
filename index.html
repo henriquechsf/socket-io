@@ -13,6 +13,8 @@
 
     <div id="msgs"></div>
 
+    <input type="text">
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
@@ -24,6 +26,19 @@
 
             // emite notificação para o servidor
             socket.emit('msg', 'Estou conectado ' + socket.id);
+        })
+
+        socket.on('msg', function (msg) {
+            $("#msgs").append(msg + '<br>');
+        })
+
+        $(function () {
+            $("input").keydown(function (key) {
+                if (key.keyCode === 13) {
+                    socket.emit('msg', $(this).val());
+                    $(this).val('');
+                }
+            })
         })
     </script>
 </body>
