@@ -11,10 +11,20 @@
 <body>
     <h1>Socket.io</h1>
 
+    <div id="msgs"></div>
+
     <script src="/socket.io/socket.io.js"></script>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         // construtor do socket
         const socket = io()
+
+        socket.on('connect', function () {
+            $("#msgs").append("connected with id: " + socket.id);
+
+            // emite notificação para o servidor
+            socket.emit('msg', 'Estou conectado ' + socket.id);
+        })
     </script>
 </body>
 

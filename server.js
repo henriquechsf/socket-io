@@ -9,7 +9,12 @@ app.get('/', (req, res) => {
 
 // callback que monitora quando usuario conecta
 io.on('connection', (socket) => {
-    console.log('new connection', socket)
+    console.log('new connection', socket.id)
+
+    // evento emitido quando receber msg do cliente
+    socket.on('msg', (msg) => {
+        console.log(msg)
+    })
 })
 
 http.listen(3000, () => {
